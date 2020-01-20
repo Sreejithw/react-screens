@@ -9,8 +9,9 @@ import Paper from '@material-ui/core/Paper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Periods from './Periods.js';
-import MaterialTable from 'material-table'
-import * as _ from "lodash";
+import PeriodList from './PeriodList.js';
+
+import { PeriodListProvider } from './PeriodListContext';
 
 const useStyles = makeStyles(theme => ({ 
     paper: {
@@ -44,37 +45,15 @@ export default function Content() {
     //-------UseStates for Quiz form -----//
     const [openQuiz, setOpenQuiz] = React.useState(false)
 
+
+  
     //-------Handle Toggles for dropdown-------//
     const handleToggle = () => {
     setOpen(prevOpen => !prevOpen);
     };
 
-    let testData = [
-      { name: "Event Number 1"},
-      { name: "Event Number  2"},
-      { name: "Quiz Number 1"},
-      { name: "Quiz Number 2"},
-      { name: "Quiz Number 3"},
-      { name: "Quiz Number 4"},
-      { name: "Quiz Number 5"},
-    ];
 
     
-    let columndata =[
-      { title:" ", field: "name" },
-      { title: " "},
-    ];
-
-    let [data, setData] = useState(testData);
-
-
-    useEffect(() => {
-      //debugger;
-      if (data.length < 100) {
-          console.log(data.length);
-      }
-    }, [data]);
-
 
     const handleClose = event => {
         let data_id = event.target.getAttribute("data-id");
@@ -142,56 +121,12 @@ export default function Content() {
                 </Grow>
               )}
             </Popper>
-            <MaterialTable
-                columns={columndata}
-                data={data}
-                title = "Period 1"
-                localization={{
-                  header:{
-                    actions:" "
-                  },
-                  body:{
-                    emptyDataSourceMessage: "No Events Provided",
-                    filterRow: {
-                      filterTooltip: 'Filter'
-                    }
-                  },
-                }}
-                options = {{
-                  actionsColumnIndex: -1,
-                  paging:false,
-                  searchFieldStyle: {
-                    display: "none"
-                  }
-                }}
-                editable={{
-                  onRowUpdate: (newData, oldData) =>
-                    new Promise((resolve, reject) => {
-                      setTimeout(() => {
-                        {
-                          let newData = data;
-                          const index = newData.indexOf(oldData);
-                          data[index] = newData;
-                          this.setState({ data }, () => resolve());
-                        }
-                        resolve()
-                      }, 1000)
-                  }),
-                  onRowDelete: oldData =>
-                      new Promise((resolve, reject) => {
-                          setTimeout(() => {
-                              let newData = data;
-                              const index = newData.indexOf(oldData);
-                              newData.splice(index, 1);
-                              setData(newData);
-                              resolve();
-                          }, 1000);
-                      })
-              }}
-              
-                
-              />
-            {openQuiz && <Periods />}
+            
+            <PeriodListProvider value = {'Hello'}>
+              <PeriodList />
+  
+              {openQuiz && <Periods  />}
+            </PeriodListProvider>
             
         </Paper>
     );

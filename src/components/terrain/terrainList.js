@@ -1,68 +1,36 @@
 const terrainList = [
     {
-      img: '/img/terrain_1.jpg',
-      title: 'Breakfast',
+      img: 'img/terrain_1.jpg',
+      title: 'Terrain 1',
       author: 'jill111',
       cols: 2,
       featured: true,
     },
     {
-      img: '/static/images/grid-list/burgers.jpg',
-      title: 'Tasty burger',
+      img: 'img/terrain_2.jpg',
+      title: 'Terrain 2',
       author: 'director90',
     },
     {
-      img: '/static/images/grid-list/camera.jpg',
-      title: 'Camera',
+      img: 'img/terrain_3.jpg',
+      title: 'Terrain 3',
       author: 'Danson67',
     },
     {
-      img: '/static/images/grid-list/morning.jpg',
-      title: 'Morning',
+      img: 'img/terrain_4.jpg',
+      title: 'Terrain 4',
       author: 'fancycrave1',
       featured: true,
     },
     {
-      img: '/static/images/grid-list/hats.jpg',
-      title: 'Hats',
+      img: 'img/terrain_5.jpg',
+      title: 'Terrain 5',
       author: 'Hans',
     },
     {
-      img: '/static/images/grid-list/honey.jpg',
-      title: 'Honey',
+      img: 'img/terrain_6.jpg',
+      title: 'Terrain 6',
       author: 'fancycravel',
-    },
-    {
-      img: '/static/images/grid-list/vegetables.jpg',
-      title: 'Vegetables',
-      author: 'jill111',
-      cols: 2,
-    },
-    {
-      img: '/static/images/grid-list/plant.jpg',
-      title: 'Water plant',
-      author: 'BkrmadtyaKarki',
-    },
-    {
-      img: '/static/images/grid-list/mushroom.jpg',
-      title: 'Mushrooms',
-      author: 'PublicDomainPictures',
-    },
-    {
-      img: '/static/images/grid-list/olive.jpg',
-      title: 'Olive oil',
-      author: 'congerdesign',
-    },
-    {
-      img: '/static/images/grid-list/star.jpg',
-      title: 'Sea star',
-      cols: 2,
-      author: '821292',
-    },
-    {
-      img: '/static/images/grid-list/bike.jpg',
-      title: 'Bike',
-      author: 'danfador',
     },
   ];
   

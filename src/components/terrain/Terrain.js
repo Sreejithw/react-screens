@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 1500,
+    width: 1600,
     height: 450,
   },
   icon: {
@@ -32,7 +32,6 @@ export default function Terrain() {
     <div className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList}>
         <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-          <ListSubheader component="div">December</ListSubheader>
         </GridListTile>
         {terrainList.map(tile => (
           <GridListTile key={tile.img}>

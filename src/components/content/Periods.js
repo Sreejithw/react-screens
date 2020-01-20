@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import { useForm } from 'react-hook-form';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -7,7 +7,10 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import { useStateMachine } from "little-state-machine";
+import updateAction from "./updateAction";
 
+import { PeriodListContext } from './PeriodListContext'; 
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -23,12 +26,22 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+
 export default function Periods() {
     const classes = useStyles();
+    //-------UseStates for Add Period ----//
+    const { register, handleSubmit,errors, getValues } = useForm();
+    const { action, state } = useStateMachine(updateAction);
+    //-------Handle Togge for Period Form Submit-----//
+    const [perioddata, setperiodData] = useContext(PeriodListContext)
 
-    const { register, handleSubmit,errors } = useForm();
-    const onSubmit = data => { console.log(data) };
-
+    //-------Update state of the period table data-----//
+    const onSubmit = data => {      
+        console.log(data);
+        setperiodData(prevData => [...prevData,{name: data.question}]);
+        
+    };
+    
     return (
         <React.Fragment>
             <Typography variant="h6" gutterBottom>
@@ -59,8 +72,19 @@ export default function Periods() {
                 />
                 {errors.exampleRequired && <span>This field is required</span>}
                 <div className={classes.submitDiv}>
-                    <Button className={classes.cancelBtn} variant="outlined">Cancel</Button>
-                    <Button variant="outlined" color="primary" type="submit">
+                    <Button 
+                    className={classes.cancelBtn} 
+                    variant="outlined"
+                    >
+                    Cancel
+                    </Button>
+                    <Button 
+                    variant="outlined" 
+                    color="primary" 
+                    type="submit" 
+                    onClick={() =>{
+                        const values = getValues()
+                    }}>
                         Save
                     </Button>
                 </div>
