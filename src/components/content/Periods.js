@@ -7,8 +7,6 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
-import { useStateMachine } from "little-state-machine";
-import updateAction from "./updateAction";
 
 import { PeriodListContext } from './PeriodListContext'; 
 
@@ -31,7 +29,6 @@ export default function Periods() {
     const classes = useStyles();
     //-------UseStates for Add Period ----//
     const { register, handleSubmit,errors, getValues } = useForm();
-    const { action, state } = useStateMachine(updateAction);
     //-------Handle Togge for Period Form Submit-----//
     const [perioddata, setperiodData] = useContext(PeriodListContext)
 
