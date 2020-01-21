@@ -1,5 +1,6 @@
 import React,{useState, useEffect, useContext} from 'react';
 import { emphasize, withStyles, makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import MaterialTable from 'material-table'
 import { PeriodListContext } from './PeriodListContext'; 
 
@@ -36,6 +37,19 @@ export default function PeriodList() {
                   searchFieldStyle: {
                     display: "none"
                   }
+                }}
+                components={{
+                  Action: props => (
+                    <Button
+                      onClick={(event) => props.action.onClick(event, props.data)}
+                      color="primary"
+                      variant="contained"
+                      style={{textTransform: 'none'}}
+                      size="small"
+                    >
+                      My Button
+                    </Button>
+                  ),
                 }}
                 editable={{
                   /*onRowUpdate: (newData, oldData) =>
