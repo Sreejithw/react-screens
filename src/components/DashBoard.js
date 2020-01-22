@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import Content from './content/Content.js';
 import Terrain from './terrain/Terrain.js';
 
+import DetailsPage from './content/DetailsPage.js';
+
 
 function Copyright() {
     return (
@@ -111,7 +113,7 @@ export default function DashBoard(){
                     </Tabs>
                 </AppBar>
                 <TabPanel value={value} index={0}>
-                    Content 1
+                    <DetailsPage/>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <Terrain />
