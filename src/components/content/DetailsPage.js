@@ -7,6 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDownIcon from '@material-ui/icons/ArrowDropDown';
+import TextAreaAutoSize from '@material-ui/core/TextareaAutosize';
 import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles( theme => ({
@@ -27,12 +28,29 @@ const useStyles = makeStyles( theme => ({
         }
     },
 
+    menuItem: {
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3),
+        height: 50,
+        backgroundColor: '#eaeaea',
+        color: 'grey'
+    },
+
+    inputField: {
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3),
+        backgroundColor: '#eaeaea',
+        fullWidth : true
+    },
+
     root: {
         width: 800,
         height: 50,
-        color: 'red'
+        color: 'grey'
     }
 }));
+
+//-------------------------------- INPUT FIELD ----------------------------------------
 
 const inputField = (placeHolderValue, labelItem) => {
 
@@ -47,7 +65,7 @@ const inputField = (placeHolderValue, labelItem) => {
     )
 }
 
-
+//----------------------------------DROP DOWN MENU--------------------------------
 
 const DropDownMenu = () => {
 
@@ -59,9 +77,22 @@ const DropDownMenu = () => {
     const [menuItemContent, setMenuContent] = useState(dropDownDefaultMessage);
     const [anchorEl, setAnchorEl] = useState(null);
 
-    const IconButtonComponent = () => {
+    const courseType = [
+        "Urban Search and Rescue",
+        "Rural Search and Rescue",
+        "Fuel Containment",
+        "Chemical Containment",
+        "Vehicle Incident",
+        "Environmental Incident"
+    ]
+
+    const IconButtonAndText = () => {
+
         return (
-            <ArrowDownIcon/>
+                <div>
+                     <ArrowDownIcon/>
+                     {menuItemContent}
+                </div>
         )
     }
 
@@ -71,7 +102,6 @@ const DropDownMenu = () => {
         
         if (dropMenuState)
         {
-            setMenuContent(" ");
             setAnchorEl(event.currentTarget);
         }
         else
@@ -81,14 +111,19 @@ const DropDownMenu = () => {
         }
     }
 
+    const SetContent = (newContent) => {
+        setMenuContent(newContent);
+        setAnchorEl(null);
+    }
   
 
     return (
         <div>
             <MenuItem
+                className = {dropDownInlineClass.menuItem}
                 onClick = {OnMenuClicked}
             >
-                DropDown
+                {IconButtonAndText()}
             </MenuItem>
             <Menu
                 id="simple-menu"
@@ -98,15 +133,42 @@ const DropDownMenu = () => {
                 onClose={OnMenuClicked}
             >
 
-                <MenuItem className = {dropDownInlineClass.root} onClick={OnMenuClicked}>Profile</MenuItem>
-                <MenuItem className = {dropDownInlineClass.root} onClick={OnMenuClicked}>Profile</MenuItem>
-                <MenuItem className = {dropDownInlineClass.root} onClick={OnMenuClicked}>Profile</MenuItem>
+                <MenuItem className = {dropDownInlineClass.root} onClick={() => SetContent(courseType[0])}>{courseType[0]}</MenuItem>
+                <MenuItem className = {dropDownInlineClass.root} onClick={() => SetContent(courseType[1])}>{courseType[1]}</MenuItem>
+                <MenuItem className = {dropDownInlineClass.root} onClick={() => SetContent(courseType[2])}>{courseType[2]}</MenuItem>
+                <MenuItem className = {dropDownInlineClass.root} onClick={() => SetContent(courseType[3])}>{courseType[3]}</MenuItem>
+                <MenuItem className = {dropDownInlineClass.root} onClick={() => SetContent(courseType[4])}>{courseType[4]}</MenuItem>
+                <MenuItem className = {dropDownInlineClass.root} onClick={() => SetContent(courseType[5])}>{courseType[5]}</MenuItem>
+               
             </Menu>
             
             
         </div>
     )
 }
+
+//-------------------------------------- COURSE DESCRIPTION --------------------------------------------
+
+const CourseDescription = () => {
+
+    const courseDescripStyle = useStyles();
+
+    return (
+        <TextField
+            id = "Question name"
+            label = "Course Description"
+            variant = "filled"
+            placeholder = "Write the description for the course"
+            fullWidth
+        >
+
+        </TextField>
+    )
+
+}
+
+
+
 
 function DetailContent() {
 
@@ -117,6 +179,8 @@ function DetailContent() {
 
             {inputField("type in course name", "Course Name")}
             {DropDownMenu()}
+            {CourseDescription()}
+
             
         </Paper>
     )
