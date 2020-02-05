@@ -1,20 +1,26 @@
-import React,{useState, useEffect, useContext} from 'react';
-import { emphasize, withStyles, makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
+import React,{useEffect, useContext} from 'react';
 import MaterialTable from 'material-table'
-import { PeriodListContext } from './PeriodListContext'; 
+import {  TableAnimation, PeriodListContext, QuizForm, FormValues,SaveButton } from '../QuizStore'; 
 
 
 export default function PeriodList() {
     
       const [perioddata, setperiodData] = useContext(PeriodListContext)
-  
+      const [openQuiz, setOpenQuiz] = React.useContext(QuizForm);
+      const { setValue } = useContext(FormValues);
+      const [savebtn, setSavebtn, addbtn, setAddbtn, rowsData, setRowsData ] = React.useContext(SaveButton);
+      const [checked, setChecked] = React.useContext(TableAnimation);
+
       let columndata =[
-        { title:" ", field: "name" },
+        { title:" ", field: "title" },
         { title: " "},
       ];
- 
 
+      useEffect(() => {
+          
+
+      }, [rowsData])
+      
     return (
         <MaterialTable
                 columns={columndata}
@@ -38,32 +44,27 @@ export default function PeriodList() {
                     display: "none"
                   }
                 }}
-                components={{
-                  Action: props => (
-                    <Button
-                      onClick={(event) => props.action.onClick(event, props.data)}
-                      color="primary"
-                      variant="contained"
-                      style={{textTransform: 'none'}}
-                      size="small"
-                    >
-                      My Button
-                    </Button>
-                  ),
-                }}
+                actions={[
+                  {
+                    icon: 'edit',
+                    tooltip: 'Edit User',
+                    onClick: (event, rowData) => {
+                      new Promise((resolve, reject) => {
+                        setRowsData(rowData);
+                        setSavebtn(!savebtn);
+                        setAddbtn(!addbtn);
+                        setTimeout(() => {
+                          setValue("question", rowData.question)
+                          setValue("answer", rowData.answer)
+                        },1000);
+                        setChecked(prev => !prev);
+                        setOpenQuiz(true);
+                        resolve();
+                      })
+                    }
+                  }
+                ]}
                 editable={{
-                  /*onRowUpdate: (newData, oldData) =>
-                    new Promise((resolve, reject) => {
-                      setTimeout(() => {
-                        {
-                          let newData = data;
-                          const index = newData.indexOf(oldData);
-                          data[index] = newData;
-                          this.setState({ data }, () => resolve());
-                        }
-                        resolve()
-                      }, 1000)
-                  }),*/
                   onRowDelete: oldData =>
                       new Promise((resolve, reject) => {
                           setTimeout(() => {

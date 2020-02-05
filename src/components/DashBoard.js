@@ -1,25 +1,12 @@
-import React,{useState, useEffect} from 'react';
-import { emphasize, withStyles, makeStyles } from '@material-ui/core/styles';
-import {CssBaseline, AppBar, Tabs, Tab, Box, Paper, Toolbar, Link, Typography} from '@material-ui/core';
+import React from 'react';
+import {  makeStyles } from '@material-ui/core/styles';
+import {CssBaseline, AppBar, Tabs, Tab, Box, Paper, Toolbar, Typography} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import Content from './content/Content.js';
 import Terrain from './terrain/Terrain.js';
 
 import DetailsPage from './content/DetailsPage.js';
-
-
-function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          Your Website
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-}
+import QuizStore from './QuizStore';
 
 const useStyles = makeStyles(theme => ({ 
     appBar: {
@@ -119,7 +106,9 @@ export default function DashBoard(){
                     <Terrain />
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    <Content />
+                    <QuizStore>
+                      <Content />
+                    </QuizStore>
                 </TabPanel>
                 <TabPanel value={value} index={3}>
                     Content 4

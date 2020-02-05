@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
-import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemText from '@material-ui/core/ListItemText';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDownIcon from '@material-ui/icons/ArrowDropDown';
-import TextAreaAutoSize from '@material-ui/core/TextareaAutosize';
 import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles( theme => ({
@@ -151,7 +147,7 @@ const DropDownMenu = () => {
 
 const CourseDescription = () => {
 
-    const courseDescripStyle = useStyles();
+    //const courseDescripStyle = useStyles();
 
     return (
         <TextField
